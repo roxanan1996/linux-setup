@@ -13,6 +13,9 @@ endif
 call plug#begin('~/.vim/bundle')
 " Plugins
 
+" Python completion
+Plug 'davidhalter/jedi-vim'
+
 Plug 'tpope/vim-fugitive'
 " https://github.com/tpope/vim-fugitive/blob/master/doc/fugitive.txt
 Plug 'iberianpig/tig-explorer.vim'
@@ -51,6 +54,10 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'nlknguyen/papercolor-theme'
 Plug 'joshdick/onedark.vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
+
+" Rust
+Plug 'rust-lang/rust.vim'
+Plug 'dense-analysis/ale'
 
 call plug#end()
 
@@ -199,7 +206,7 @@ au BufRead,BufNewFile *.g4 set filetype=antlr4
 "endif
 
 " highlight when search is used
-set hls is
+"set hls is
 
 "-------------------------------------------------------------------------------
 " OmniCppCompletion plugin
@@ -248,4 +255,24 @@ let OmniCpp_MayCompleteArrow = 1
 let OmniCpp_MayCompleteScope = 0
 " don't select first item in pop-up menu
 let OmniCpp_SelectFirstItem = 0
+
+" Highlight trailing spaces
+:highlight ExtraWhitespace ctermbg=red guibg=red
+:match ExtraWhitespace /\s\+$/
+
+" Rust
+" autoformat on save
+let g:rustfmt_autosave = 1
+" As-you-type autocomplete
+set completeopt=menu,menuone,preview,noselect,noinsert
+let g:ale_completion_enabled = 1
+" Map go to definition
+nnoremap <C-O> :ALEGoToDefinition<CR>
+
+
+let g:ale_linters = {
+\  'rust': ['analyzer'],
+\}
+
+let g:ale_fixers = { 'rust': ['rustfmt', 'trim_whitespace', 'remove_trailing_lines'] }
 

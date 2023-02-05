@@ -74,3 +74,11 @@ cp ./vimrc ~/.vimrc
 vim -c 'PlugInstall'
 
 cp  ./tmux.conf ~/.tmux.conf
+
+# Rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source $HOME/.cargo/env
+cargo install cargo-binutils rustfilt
+
+curl -o  ~/.rust-analyzer https://github.com/rust-analyzer/rust-analyzer/releases/download/2021-04-12/rust-analyzer-linux
+chmod +x ~/.rust-analyzer
